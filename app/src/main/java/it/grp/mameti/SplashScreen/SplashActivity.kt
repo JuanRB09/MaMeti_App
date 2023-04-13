@@ -8,6 +8,7 @@ import it.grp.mameti.MainActivity
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Thread.sleep(1500)
         startActivity(Intent(this, MainActivity::class.java)) //MANDA LLAMAR EL MAIN AL TERMINAR EL SPLASH
         finish()
     }
