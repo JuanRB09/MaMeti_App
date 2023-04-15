@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Login.LoginActivity">
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifLogin"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/dog_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/gifLogin"
+        tools:layout_editor_absoluteX="parent">
+
+        <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_family"
+            android:text="LOGIN"
+            android:textSize="35dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="70dp" />
+
+        <EditText
+            android:id="@+id/etUsuario"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_user_log"
+            android:ems="10"
+            android:hint="  Usuario"
+            android:textColorHint="@color/black"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+        <EditText
+            android:id="@+id/etContrasena"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_pass_log"
+            android:ems="10"
+            android:hint="  Contraseña"
+            android:textColorHint="@color/black"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <Button
+            android:id="@+id/btLogin"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="Login" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
