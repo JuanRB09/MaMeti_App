@@ -3,10 +3,10 @@
 
     <item android:drawable="@color/white"/>
     <item
-        android:left="50dp"
-        android:right="50dp"
-        android:top="210dp"
-        android:bottom="210dp">
+        android:left="80dp"
+        android:right="80dp"
+        android:top="280dp"
+        android:bottom="280dp">
         <bitmap android:src="@drawable/mameti_pp"/>
     </item>
 
