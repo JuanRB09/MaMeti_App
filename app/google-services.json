@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "230042367972",
+    "project_id": "mameti-grp",
+    "storage_bucket": "mameti-grp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:230042367972:android:8eb4e027a98c04a9d039f1",
+        "android_client_info": {
+          "package_name": "it.grp.mameti"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "230042367972-qg1k11g63ijnv2uvbsbm4sg4nfm719ck.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "it.grp.mameti",
+            "certificate_hash": "0f423e2a7a983d04acf2a060ea25ebde1d2db613"
+          }
+        },
+        {
+          "client_id": "230042367972-87ft2j1ju4n79bk97vo6oddnugf8omdg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5WMc91rVu2xBn92hKi-fCbzrwyCDCjcw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "230042367972-87ft2j1ju4n79bk97vo6oddnugf8omdg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

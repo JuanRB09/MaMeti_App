@@ -49,9 +49,11 @@
             android:drawableLeft="@drawable/ic_user_log"
             android:ems="10"
             android:fontFamily="@font/montserrat_variablefont"
-            android:hint="  Usuario"
+            android:hint="Usuario"
             android:inputType="textEmailAddress"
             android:minHeight="48dp"
+            android:drawablePadding="10dp"
+            android:textColor="@color/black"
             android:textColorHint="@color/black"
             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -67,9 +69,11 @@
             android:drawableLeft="@drawable/ic_pass_log"
             android:ems="10"
             android:fontFamily="@font/montserrat_variablefont"
-            android:hint="  Contraseña"
+            android:hint="Contraseña"
             android:inputType="textPassword"
             android:minHeight="48dp"
+            android:drawablePadding="10dp"
+            android:textColor="@color/black"
             android:textColorHint="@color/black"
             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -97,7 +101,8 @@
             android:background="#00000000"
             android:fontFamily="@font/montserrat_bold"
             android:onClick="forgotPassword"
-            android:text="¿Olvidaste la contraseña?"
+            android:text="¿Olvidaste la Contraseña?"
+            android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="8dp"
             tools:ignore="TouchTargetSizeCheck" />
@@ -134,7 +139,7 @@
                 android:layout_height="60dp"
                 android:layout_weight="1"
                 android:background="@drawable/round_borders_btn_rsl"
-                app:srcCompat="@drawable/gmail_icon"
+                app:srcCompat="@drawable/google_icon"
                 tools:ignore="SpeakableTextPresentCheck" />
 
         </LinearLayout>
