@@ -15,12 +15,20 @@
         <activity
             android:name=".Home.Home"
             android:exported="false"
-            android:label="@string/title_activity_home">
+            android:label="@string/title_activity_home"
+            android:theme="@style/NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <!-- ACTIVITY: CREAR PERFIL CANINO (CREATE DOG PROFILE) -->
+<!--        <activity-->
+<!--            android:name=".Home.Home"-->
+<!--            android:exported="false"-->
+<!--            android:label="@string/title_activity_home">-->
+<!--            <meta-data-->
+<!--                android:name="android.app.lib_name"-->
+<!--                android:value="" />-->
+<!--        </activity> &lt;!&ndash; ACTIVITY: CREAR PERFIL CANINO (CREATE DOG PROFILE) &ndash;&gt;-->
         <activity
             android:name=".CreateProfiles.CreateDogProfile"
             android:exported="false">
