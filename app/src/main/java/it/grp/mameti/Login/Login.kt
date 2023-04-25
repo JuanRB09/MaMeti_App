@@ -32,45 +32,27 @@ class Login : AppCompatActivity() {
     //AUTENTICACION CON FIREBASE (CORREO)
     private fun acceso() {
         title = "Autenticación"
-        //SOLO TOMAR UNO PARA PROBAR
-        //PARA REGISTRAR
-//        btLogin.setOnClickListener{
-//            if(etUsuario.text.isNotEmpty() && etContrasena.text.isNotBlank()){
-//                FirebaseAuth.getInstance().createUserWithEmailAndPassword(etUsuario.text.toString(),
-//                    etContrasena.text.toString()).addOnCompleteListener(){
-//                    if (it.isSuccessful){
-//                        startActivity(Intent(this, CreateHumanProfile::class.java))
-//                        finish()
-//                    }else{
-//                        alerta_noAuth()
-//                    }
-//                }
-//            }else{
-//              alerta_noData()
-//             }
-//        }
 
-        //PARA LOGEAR
-//        btLogin.setOnClickListener{
-//            if(etUsuario.text.isNotEmpty() && etContrasena.text.isNotBlank()){
-//                FirebaseAuth.getInstance().signInWithEmailAndPassword(etUsuario.text.toString(),
-//                    etContrasena.text.toString()).addOnCompleteListener(){
-//                    if (it.isSuccessful){
-//                        startActivity(Intent(this, CreateHumanProfile::class.java))
-//                        finish()
-//                    }else{
-//                        alerta_noAuth()
-//                    }
-//                }
-//            }else{
-//                alerta_noData()
-//            }
-//        }
+        btLogin.setOnClickListener{
+            if(etUsuario.text.isNotEmpty() && etContrasena.text.isNotBlank()){
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(etUsuario.text.toString(),
+                    etContrasena.text.toString()).addOnCompleteListener(){
+                    if (it.isSuccessful){
+                        startActivity(Intent(this, CreateHumanProfile::class.java))
+                        finish()
+                    }else{
+                        alerta_noAuth()
+                    }
+                }
+            }else{
+                alerta_noData()
+            }
+        }
 
     }
     //METODOS COMPLEMENTO: MUESTRA DE ALERTAS
     private fun alerta_noAuth(){
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this, R.style.AlertDialog)
         builder.setTitle("¡Error!")
         builder.setMessage("No se ha podido autenticar al usuario.")
         builder.setPositiveButton("Aceptar", null)
@@ -78,7 +60,7 @@ class Login : AppCompatActivity() {
         dialog.show()
     }
     private fun alerta_noData(){
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this, R.style.AlertDialog)
         builder.setTitle("¡Error!")
         builder.setMessage("Complete ambos campos.")
         builder.setPositiveButton("Aceptar", null)
