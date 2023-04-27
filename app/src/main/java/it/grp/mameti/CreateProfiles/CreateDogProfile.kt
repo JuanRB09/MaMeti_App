@@ -8,5 +8,6 @@ class CreateDogProfile : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_dog_profile)
+        supportActionBar?.hide()
     }
 }

@@ -14,6 +14,7 @@ class CreateHumanProfile : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_human_profile)
+        supportActionBar?.hide()
     }
 
     private fun alertProfile(){
