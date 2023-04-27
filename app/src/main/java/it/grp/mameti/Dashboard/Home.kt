@@ -10,10 +10,9 @@ import androidx.navigation.ui.setupWithNavController
 import it.grp.mameti.R
 import it.grp.mameti.databinding.ActivityHomeBinding
 
-
 class Home : AppCompatActivity() {
 
-    private lateinit var binding: ActivityHomeBindingeBinding
+    private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,3 +34,4 @@ class Home : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 }
+
