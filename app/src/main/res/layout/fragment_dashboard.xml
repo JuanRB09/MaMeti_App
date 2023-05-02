@@ -18,7 +18,6 @@
         android:textColor="@color/black"
         android:fontFamily="@font/montserrat_bold"
         android:textSize="20sp"
-        android:text="Ventana 1: Dashboard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
