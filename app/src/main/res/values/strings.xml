@@ -3,7 +3,7 @@
     <string name="title_activity_home">Home</string>
     <string name="title_home">Monitoreo</string>
     <string name="title_dashboard">Amo</string>
-    <string name="title_notifications">Perros</string>
+    <string name="title_notifications">Mascota</string>
     <string name="ok">Aceptar</string>
     <string name="cancel">Cancelar</string>
     <string name="tab_text_1">Tab 1</string>
@@ -19,4 +19,6 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <string name="prefs_file">it.grp.mameti.PREFERENCE_FILE_KEY</string>
 </resources>

@@ -10,8 +10,57 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
+        <activity
+            android:name=".Splasher.Mascota"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Splasher.Usuario"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Splasher.Monitoreo"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Splasher.SplashMain"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Temporal.Vprincipal"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Temporal.Informacion"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Temporal.Emergencias"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".Dashboard.Home"
             android:exported="false"
@@ -19,40 +68,35 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
-        <!-- ACTIVITY: CREAR PERFIL CANINO (CREATE DOG PROFILE) -->
+        </activity> <!-- ACTIVITY: CREAR PERFIL CANINO (CREATE DOG PROFILE) -->
         <activity
             android:name=".CreateProfiles.CreateDogProfile"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
-        <!-- ACTIVITY: CREAR PERFIL HUMANO (CREATE HUMAN PROFILE) -->
+        </activity> <!-- ACTIVITY: CREAR PERFIL HUMANO (CREATE HUMAN PROFILE) -->
         <activity
             android:name=".CreateProfiles.CreateHumanProfile"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
-        <!-- ACTIVITY: CONTRASEÑA OLVIDADA (FORGOT PASSWORD) -->
+        </activity> <!-- ACTIVITY: CONTRASEÑA OLVIDADA (FORGOT PASSWORD) -->
         <activity
             android:name=".Login.ForgotPassword"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
-        <!-- ACTIVITY: LOGIN -->
+        </activity> <!-- ACTIVITY: LOGIN -->
         <activity
             android:name=".Login.Login"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
-        <!-- ACTIVITY: SPLASHSCREEN -->
+        </activity> <!-- ACTIVITY: SPLASHSCREEN -->
         <activity
             android:name=".SplashScreen.SplashActivity"
             android:exported="true"

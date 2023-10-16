@@ -105,6 +105,7 @@
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="8dp"
+            android:visibility="invisible"
             tools:ignore="TouchTargetSizeCheck" />
 
         <Space
@@ -119,11 +120,12 @@
 
             <ImageButton
                 android:id="@+id/btnLoginFB"
-                android:scaleType="fitXY"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
                 android:background="@drawable/round_borders_btn_rsl"
+                android:clickable="false"
+                android:scaleType="fitXY"
                 app:srcCompat="@drawable/fb_icon"
                 tools:ignore="SpeakableTextPresentCheck" />
 
