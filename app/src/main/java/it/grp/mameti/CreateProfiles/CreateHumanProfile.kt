@@ -27,11 +27,7 @@ class CreateHumanProfile : AppCompatActivity() {
     private fun noEmpty(){
         title = "Verificacion"
         btnRegistro.setOnClickListener(){
-            if (etNombres.text.isNotEmpty() &&
-                etApellidoPaterno.text.isNotEmpty() &&
-                etApellidoMaterno.text.isNotEmpty() &&
-                etCorreo.text.isNotEmpty() &&
-                etTelefono.text.isNotEmpty() &&
+            if (etCorreo.text.isNotEmpty() &&
                 etAuthPass1.text.isNotEmpty() &&
                 etAuthPass2.text.isNotEmpty()) {
                 equalsPass()
@@ -58,16 +54,6 @@ class CreateHumanProfile : AppCompatActivity() {
         builder.apply {
             setPositiveButton(R.string.ok,
                 DialogInterface.OnClickListener { dialog, btnAceptar ->
-                    //SI NO ESTAN VACIOS Y AMBAS CONTRASEÑAS SON IGUALES INICIA EL REGISTRO DE LA INFORMACION EN LA BASE DE DATOS
-                    mametiDBHelper.crearHumano1(
-                        etNombres.text.toString(),
-                        etApellidoPaterno.text.toString(),
-                        etApellidoMaterno.text.toString(),
-                        etCorreo.text.toString(),
-                        etTelefono.text.toString(),
-                        etAuthPass2.text.toString(),
-                    )
-
                     //SI NO ESTAN VACIOS INICIA EL REGISTRO EN FIREBASE
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(
                         etCorreo.text.toString(),
