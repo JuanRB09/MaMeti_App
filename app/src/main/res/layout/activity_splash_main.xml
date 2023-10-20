@@ -20,7 +20,6 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:layout_marginLeft="10dp"
             android:background="@drawable/round_borders_btn_nw"
             android:padding="4dp"
             android:scaleType="fitXY"
@@ -84,6 +83,20 @@
             android:drawablePadding="-24dp"
             android:drawableLeft="@drawable/ic_baseline_pets_24"
             android:text="Perfil mascota" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+
+        <Button
+            android:id="@+id/btnEmergencias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_borders_btn"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/white"
+            android:text="EMERGENCIA" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

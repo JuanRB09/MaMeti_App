@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -18,6 +19,7 @@ import java.io.ByteArrayOutputStream
 
 var mailM = ""
 var provM = ""
+var base64String: String? = ""
 
 enum class ProviderTypeM{
     BASIC,
@@ -28,7 +30,6 @@ class Mascota : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()
     private val PICK_IMAGE_REQUEST = 1
-    var base64String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,19 +41,22 @@ class Mascota : AppCompatActivity() {
         setup(email ?:"", prov ?: "")
 
         //CARGAR LOS DATOS A LA VISTA
-        db.collection("users").document(email!!).collection("data").document("petData").get().addOnSuccessListener {
-            etNombreMascota.setText(it.get("nombremascota") as String?)
-            etEdad.setText(it.get("edadmascota") as String?)
-            etPesoMascota.setText(it.get("pesomascota") as String?)
-            etRazaMascota.setText(it.get("razamascota") as String?)
-            etTalla.setText(it.get("tallamascota") as String?)
-            base64String = ((it.get("mapaimagenmascota") as String?).toString())
+        db.collection("users").document(email!!).collection("data").document("petData").get().addOnSuccessListener { documentSnapshot ->
+            val data = documentSnapshot.data
+            if (data != null) {
+                etNombreMascota.setText(data["nombremascota"] as String?)
+                etEdad.setText(data["edadmascota"] as String?)
+                etPesoMascota.setText(data["pesomascota"] as String?)
+                etRazaMascota.setText(data["razamascota"] as String?)
+                etTalla.setText(data["tallamascota"] as String?)
+                base64String = data["mapaimagenmascota"] as String?
+                if(base64String != null && base64String!!.isNotEmpty()){
+                    val imageBytes = Base64.decode(base64String, Base64.DEFAULT)
+                    val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                    imageView.setImageBitmap(bitmap)
+                }
+            }
         }
-
-        //PASAR DE BASE64 A IMAGEN
-        val imageBytes = Base64.decode(base64String, Base64.DEFAULT)
-        val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-        imageView.setImageBitmap(bitmap)
 
         //BOTON PARA ALMACENAR LOS DATOS DE LA MASCOTA
         btnGuardarCambios.setOnClickListener{
@@ -113,9 +117,10 @@ class Mascota : AppCompatActivity() {
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
             val selectedImageUri = data?.data
-
             if (selectedImageUri != null) {
-                //CONVERTIR LA IMAGEN A BASE 64
+                //ENVIAR LA IMAGEN SELECCIONADA AL IMAGEVIEW
+                imageView.setImageURI(selectedImageUri)
+                //CONVERTIR LA IMAGEN A BASE64
                 try {
                     val inputStream = contentResolver.openInputStream(selectedImageUri)
                     val bytes = ByteArrayOutputStream()
@@ -128,14 +133,9 @@ class Mascota : AppCompatActivity() {
 
                     val imageBytes = bytes.toByteArray()
                     base64String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
-
-                    //print("\n\n\n\n\n"+base64String+"\n\n\n\n\n")
-                    // Ahora 'base64String' contiene la imagen en formato Base64
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
-                //CARGAR LA IMAGEN AL IMAGEVIEW DE LA ACTIVITY
-
             }
         }
     }
