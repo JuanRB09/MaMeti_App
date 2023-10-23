@@ -36,6 +36,7 @@ class SplashMain : AppCompatActivity() {
         guiaMonitoreo()
         guiaPerfilHumano(mail, ProviderTypeU.BASIC)
         guiaPerfilMascota(mail, ProviderTypeM.BASIC)
+        guiaEmergencias(mail, ProviderTypeM.BASIC)
     }
 
     private fun setup(email:String, proveedor:String){
@@ -72,6 +73,14 @@ class SplashMain : AppCompatActivity() {
     private fun guiaPerfilMascota(email: String, proveedor: ProviderTypeM){
         btnMascota.setOnClickListener{
             startActivity(Intent(this, Mascota::class.java).apply{
+                putExtra("email", email)
+                putExtra("proveedor", proveedor.name)
+            })
+        }
+    }
+    private fun guiaEmergencias(email: String, proveedor: ProviderTypeM){
+        btnEmergencias.setOnClickListener{
+            startActivity(Intent(this, Emergencias::class.java).apply{
                 putExtra("email", email)
                 putExtra("proveedor", proveedor.name)
             })
