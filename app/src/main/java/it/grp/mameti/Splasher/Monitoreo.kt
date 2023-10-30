@@ -1,7 +1,9 @@
 package it.grp.mameti.Splasher
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
+import android.util.Base64
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.RequestQueue
@@ -10,12 +12,18 @@ import com.android.volley.Response.Listener
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
+import com.google.firebase.firestore.FirebaseFirestore
 import it.grp.mameti.R
+import kotlinx.android.synthetic.main.activity_mascota.*
 import kotlinx.android.synthetic.main.activity_monitoreo.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
+import kotlin.random.Random
+
+var mailMon = ""
+var provMon = ""
 
 val id = 1
 var temperatura:Float = 0.0f
@@ -24,9 +32,18 @@ var cardio = 0
 var temp:Float = 0.0f
 var hume = 0
 var card = 0
+//VARIABLES POR DEFECTO PARA EL MONITOREO
+var cardMax = 0
+var cardMin = 0
+var humedad_establecida = 0f
+var temperatura_establecida = 0f
+var talla:String? = ""
+var advertencia_valores = ""
+/*LOS VALORES DEL ARRAY PARA EL RITMO CARDIACO VAN DE PAR
+    - POS 0 Y 1: TALLA CHICA, POS 2 Y 3: TALLA MEDIANA, POS 4 Y 5: TALLA GRANDE*/
+var valores_par:IntArray = intArrayOf(90, 130, 70, 120, 60, 100)
 
 var requestQueue: RequestQueue? = null
-
 private val handler = Handler()
 val timer = Timer()
 
@@ -51,25 +68,79 @@ var consejoTemp = arrayOf(
     "LA HÚMEDAD ESTA BIEN, NO HAY DE QUE PREOCUPARSE"
 )
 
+enum class ProviderTypeMon{
+    BASIC,
+    GOOGLE
+}
+
 class Monitoreo : AppCompatActivity() {
+
+    private val db = FirebaseFirestore.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_monitoreo)
 
-        try {
-            timer.scheduleAtFixedRate(object : TimerTask() {
-                override fun run() {
-                    actualizaDatos()
+        val bundle = intent.extras
+        val email = bundle?.getString("email")
+        val prov = bundle?.getString("proveedor")
+        setup(email ?:"", prov ?: "")
+
+        //CARGAR LA TALLA DE LA MASCOTA EN UNA VARIABLE
+        db.collection("users").document(email!!).collection("data").document("petData").get().addOnSuccessListener { documentSnapshot ->
+            val data = documentSnapshot.data
+            if (data != null)
+                talla = data["tallamascota"] as String?
+
+            if (talla != ""){
+                if (talla == "Chica"){
+                    cardMin = valores_par[0]
+                    cardMax = valores_par[1]
+                }else if(talla == "Mediana"){
+                    cardMin = valores_par[2]
+                    cardMax = valores_par[3]
+                }else if(talla == "Grande") {
+                    cardMin = valores_par[4]
+                    cardMax = valores_par[5]
                 }
-            }, 0, 1500)
-        } catch (e: Exception) {
-            e.printStackTrace()
+                tvValoresTalla.text = "Talla de Mascota: $talla\nMínimo de Cardio: $cardMin - Máximo de Cardio: $cardMax"
+                etT1.setText(cardMin.toString())
+                etT2.setText(cardMax.toString())
+            }
         }
+
+        handler.postDelayed({
+
+            if (etT1.text.toString() != ""){
+                cardMin = (etT1.text.toString()).toInt()
+                cardMax = (etT2.text.toString()).toInt()
+                //ITERATIVIDAD PARA CARGAR LOS DATOS
+                try {
+                    timer.scheduleAtFixedRate(object : TimerTask() {
+                        override fun run() {
+                            actualizaDatos(cardMin, cardMax)
+                        }
+                    }, 0, 1500)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+
+        }, 1500)
+
+
 
     }
 
+    private fun setup(email:String, proveedor:String) {
+        title = "Inicio"
+        mailMon = email
+        provMon = proveedor.toString()
+    }
+
     //METODO PERSISTENTE PARA ACTUALIZAR LOS DATOS
-    private fun actualizaDatos() {
+    private fun actualizaDatos(cardMin: Int, cardMax: Int) {
+
         val runnable = object : Runnable{
             override fun run() {
                 consultaBD()
@@ -85,25 +156,16 @@ class Monitoreo : AppCompatActivity() {
                 }
 
                 //CONDICIONALES PARA CARDIO
-                if(card>45 && card<65){
+                if(card>45 && card<cardMin){
                     TXTConsejoCardio.setText(consejoCard[7]);
                     IMGCardio.setImageResource(R.drawable.cardio_medio);
-                }else if(card>65 && card<95){
+                }else if(card>cardMin && card<cardMax){
                     TXTConsejoCardio.setText(consejoCard[1]);
                     IMGCardio.setImageResource(R.drawable.cardio_bajo);
-                }else if(card>95 && card<110){
-                    TXTConsejoCardio.setText(consejoCard[1]);
-                    IMGCardio.setImageResource(R.drawable.cardio_bajo);
-                }else if(card>120 && card<125){
-                    TXTConsejoCardio.setText(consejoCard[2]);
-                    IMGCardio.setImageResource(R.drawable.cardio_bajo);
-                }else if(card>125 && card<130){
+                }else if(card>cardMax && card<cardMax+25){
                     TXTConsejoCardio.setText(consejoCard[3]);
                     IMGCardio.setImageResource(R.drawable.cardio_medio);
-                }else if(card>130 && card <140){
-                    TXTConsejoCardio.setText(consejoCard[4]);
-                    IMGCardio.setImageResource(R.drawable.cardio_medio);
-                }else if(card>140){
+                }else if(card>cardMax+26){
                     TXTConsejoCardio.setText(consejoCard[5]);
                     IMGCardio.setImageResource(R.drawable.cardio_alto);
                 }

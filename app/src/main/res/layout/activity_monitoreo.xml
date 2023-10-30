@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".Splasher.Monitoreo">
 
+    <TextView
+        android:id="@+id/tvValoresTalla"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:gravity="center"
+        android:text="¡NO SE HA ESTABLECIDO UNA TALLA DE MASCOTA!\nVE AL PERFIL DE MASCOTA Y CONFIGURA UNA"
+        android:textColor="#000000"
+        android:textSize="12dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
     <LinearLayout
         android:id="@+id/lyCardio"
         android:layout_width="match_parent"
@@ -21,7 +34,7 @@
             android:layout_width="285dp"
             android:layout_height="wrap_content"
             android:background="@drawable/round_borders_btn"
-            android:fontFamily="sans-serif-black"
+            android:fontFamily="@font/montserrat_bold"
             android:text="RITMO CARDIACO"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -69,6 +82,7 @@
             android:text="¡LA INFORMACIÓN SE ESTA CARGANDO!
 RECUERDA: EL NO ES UNA MASCOTA, ES TU AMIGO ❤"
             android:textAlignment="center"
+            android:fontFamily="@font/montserrat_bold"
             android:textColor="#000000"
             android:textSize="11sp"
             android:textStyle="bold" />
@@ -90,7 +104,7 @@ RECUERDA: EL NO ES UNA MASCOTA, ES TU AMIGO ❤"
             android:layout_width="285dp"
             android:layout_height="wrap_content"
             android:background="@drawable/round_borders_btn"
-            android:fontFamily="sans-serif-black"
+            android:fontFamily="@font/montserrat_bold"
             android:text="TEMPERATURA"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -160,9 +174,37 @@ RECUERDA: EL NO ES UNA MASCOTA, ES TU AMIGO ❤"
             android:text="¡LA INFORMACIÓN SE ESTA CARGANDO!
 RECUERDA: EL NO ES UNA MASCOTA, ES TU AMIGO ❤"
             android:textAlignment="center"
+            android:fontFamily="@font/montserrat_bold"
             android:textColor="#000000"
             android:textSize="11sp"
             android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lyTemperatura">
+
+        <EditText
+            android:id="@+id/etT1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:ems="10"
+            android:inputType="number"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <EditText
+            android:id="@+id/etT2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:ems="10"
+            android:inputType="number"
+            tools:ignore="TouchTargetSizeCheck" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

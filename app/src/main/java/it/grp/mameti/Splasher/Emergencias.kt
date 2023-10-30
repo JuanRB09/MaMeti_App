@@ -1,39 +1,27 @@
 package it.grp.mameti.Splasher
 
-//CLAVE DE API: AIzaSyC7nuTxegFOPU0f7lpjeTHXJ2BkIGFi4vg
-
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Location
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.compose.ui.text.android.style.PlaceholderSpan
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.model.TypeFilter
-import com.google.android.libraries.places.api.net.FetchPlaceRequest
-import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
-import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
-import com.google.android.libraries.places.api.net.PlacesClient
-import com.google.type.LatLng
+import com.google.firebase.firestore.FirebaseFirestore
 import it.grp.mameti.CreateProfiles.RegistroVeterinarios
 import it.grp.mameti.R
+import it.grp.mameti.databinding.ActivityEmergenciasBinding
 import kotlinx.android.synthetic.main.activity_emergencias.*
-import kotlinx.android.synthetic.main.activity_splash_main.*
+import kotlinx.android.synthetic.main.activity_usuario.*
 
 var mailE = ""
 var provE = ""
@@ -44,6 +32,8 @@ enum class ProviderTypeE {
 }
 
 class Emergencias : AppCompatActivity() {
+
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +46,8 @@ class Emergencias : AppCompatActivity() {
 
         guiaPerfilVet(mail, ProviderTypeU.BASIC)
 
+        btnCallContact.setOnClickListener{ requestPermissions() }
+
         btnVetCercanos.setOnClickListener {
             val busqueda = "Veterinarios"
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=$busqueda"))
@@ -67,6 +59,83 @@ class Emergencias : AppCompatActivity() {
             }
         }
 
+        db.collection("users")
+            .document(email!!)
+            .collection("data")
+            .document("contactData")
+            .collection("contacts")
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                val documentNames = mutableListOf<String>()
+                for (document in querySnapshot) {
+                    val nombre = document.id // Nombre del documento
+                    documentNames.add(nombre)
+                }
+                documentNames.add(0, "Selecciona un contacto")
+                // Crea un ArrayAdapter con los nombres y configura el Spinner
+                val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, documentNames)
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spnContactos.adapter = adapter
+
+                spnContactos.setSelection(0, false)
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(this,"¡No se obtuvieron contactos!", Toast.LENGTH_SHORT).show()
+            }
+
+        spnContactos.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedItem = spnContactos.selectedItem as String
+                db.collection("users")
+                    .document(email!!)
+                    .collection("data")
+                    .document("contactData")
+                    .collection("contacts")
+                    .document(selectedItem)
+                    .get().addOnSuccessListener {
+                        tvNombreContacto.text = it.get("nombrecontacto") as String?
+                        etContactoPrincipalM.setText(it.get("contacto1") as String?)
+                        etContactoSecundarioM.setText(it.get("contacto2") as String?)
+                        etDireccionVetM.setText(it.get("direccioncontacto") as String?)
+                }
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Toast.makeText(this@Emergencias,"¡No se selecciono un contacto!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+    }
+
+    //PARTE DE LA LLAMADA
+    private fun requestPermissions() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            when{
+                ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.CALL_PHONE
+                ) == PackageManager.PERMISSION_GRANTED -> {
+                    call()
+                }else -> requestPermissionLauncher.launch(Manifest.permission.CALL_PHONE)
+
+            }
+        }else{
+            call()
+        }
+    }
+    private fun call() {
+        val numTel = etContactoPrincipalM.text.toString()
+        if(numTel != "")
+            startActivity(Intent(Intent.ACTION_CALL,Uri.parse("tel:$numTel")))
+        else
+            Toast.makeText(this,"¡No hay un numero de telefono!", Toast.LENGTH_SHORT).show()
+    }
+    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
+        isGranted ->
+        if(isGranted){
+            call()
+        }else{
+            alerta_noAppCall()
+        }
     }
 
     private fun setup(email: String, proveedor: String) {
@@ -75,6 +144,7 @@ class Emergencias : AppCompatActivity() {
         provE = proveedor.toString()
     }
 
+    //GUIA A OTRAS PANTALLAS
     private fun guiaPerfilVet(email: String, proveedor: ProviderTypeU){
         btnRegistrarVeterinarios.setOnClickListener {
             startActivity(Intent(this, RegistroVeterinarios::class.java).apply {
@@ -88,6 +158,15 @@ class Emergencias : AppCompatActivity() {
         val builder = AlertDialog.Builder(this, R.style.AlertDialog)
         builder.setTitle("¡Error!")
         builder.setMessage("Verifica que Google Maps este instalado.")
+        builder.setPositiveButton("Aceptar", null)
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
+    private fun alerta_noAppCall(){
+        val builder = AlertDialog.Builder(this, R.style.AlertDialog)
+        builder.setTitle("¡Error!")
+        builder.setMessage("Ha ocurrido un error inesperado, intentar por otro medio.")
         builder.setPositiveButton("Aceptar", null)
         val dialog: AlertDialog = builder.create()
         dialog.show()

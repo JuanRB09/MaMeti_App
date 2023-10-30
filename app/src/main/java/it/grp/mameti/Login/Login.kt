@@ -91,9 +91,6 @@ class Login : AppCompatActivity() {
     }
 
     //NAVEGAR A LAS DIFERENTES PANTALLAS
-    fun forgotPassword(view: View) {
-        startActivity(Intent(this, ForgotPassword::class.java))
-    }
     fun createAccount(view: View) {
         startActivity(Intent(this, CreateHumanProfile::class.java))
     }

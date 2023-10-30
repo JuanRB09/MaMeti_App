@@ -41,6 +41,24 @@
                     android:layout_height="20dp" />
 
                 <EditText
+                    android:id="@+id/etNombreVet"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/round_borders_et2"
+                    android:drawableLeft="@drawable/ic_user_log"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:fontFamily="@font/montserrat_variablefont"
+                    android:hint="Nombre"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp" />
+
+                <EditText
                     android:id="@+id/etContactoPrincipal"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
@@ -69,24 +87,6 @@
                     android:ems="10"
                     android:fontFamily="@font/montserrat_variablefont"
                     android:hint="Contacto Secundario"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    tools:ignore="TouchTargetSizeCheck" />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp" />
-
-                <EditText
-                    android:id="@+id/etNombreVet"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:background="@drawable/round_borders_et2"
-                    android:drawableLeft="@drawable/ic_user_log"
-                    android:drawablePadding="10dp"
-                    android:ems="10"
-                    android:fontFamily="@font/montserrat_variablefont"
-                    android:hint="Nombre"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     tools:ignore="TouchTargetSizeCheck" />
@@ -168,12 +168,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@drawable/round_borders_et2"
-                    android:drawableLeft="@drawable/phone_icon"
+                    android:drawableLeft="@drawable/ic_user_log"
                     android:drawablePadding="10dp"
                     android:ems="10"
                     android:fontFamily="@font/montserrat_variablefont"
-                    android:hint="Telefono"
-                    android:inputType="phone"
+                    android:hint="Nombre"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     tools:ignore="TouchTargetSizeCheck" />

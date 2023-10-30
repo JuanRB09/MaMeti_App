@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
 import it.grp.mameti.R
-import it.grp.mameti.Splasher.mailU
-import it.grp.mameti.Splasher.provU
 import kotlinx.android.synthetic.main.activity_registro_veterinarios.*
 
 var mailRC = ""
@@ -32,7 +30,7 @@ class RegistroVeterinarios : AppCompatActivity() {
 
         //GUARDAR LOS DATOS DEL CONTACTO
         btnGuardarContacto.setOnClickListener {
-            db.collection("users").document(email!!).collection("data").document("contactData").collection("contacts").document(etContactoPrincipal.text.toString()).set(
+            db.collection("users").document(email!!).collection("data").document("contactData").collection("contacts").document(etNombreVet.text.toString()).set(
                 hashMapOf(
                     "contacto1" to etContactoPrincipal.text.toString(),
                     "contacto2" to etContactoSecundario.text.toString(),
@@ -55,12 +53,13 @@ class RegistroVeterinarios : AppCompatActivity() {
             documentReference.delete()
                 .addOnSuccessListener {
                    Toast.makeText(this,"¡Contacto eliminado con exito!", Toast.LENGTH_SHORT).show()
+                   etContactoElim.setText("")
                 }
-                .addOnFailureListener { e ->
-                    Toast.makeText(this,"¡El contacto no existe!", Toast.LENGTH_SHORT).show()
+                .addOnFailureListener { _ ->
+                   Toast.makeText(this,"¡El contacto no existe!", Toast.LENGTH_SHORT).show()
                 }
-            etContactoElim.setText("")
         }
+
     }
 
     private fun setup(email:String, proveedor:String) {

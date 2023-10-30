@@ -12,56 +12,184 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/lyMedico"
+            android:id="@+id/lyDocker"
             android:layout_width="match_parent"
-            android:layout_height="550dp"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingTop="40dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp">
 
-            <ScrollView
+            <LinearLayout
+                android:id="@+id/lySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Spinner
+                    android:id="@+id/spnContactos"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/round_borders_et2"
+                    android:fontFamily="@font/montserrat_variablefont"
+                    android:textAlignment="center"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="@drawable/round_borders_et2"
+                    android:editable="false"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/tvNombreContacto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="18dp"
+                android:gravity="left"
+                android:paddingLeft="20dp"
+                android:text="Nombre"
+                android:textColor="@color/black" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <EditText
+                android:id="@+id/etContactoPrincipalM"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/round_borders_et2"
+                android:drawableLeft="@drawable/phone_icon"
+                android:drawablePadding="10dp"
+                android:editable="false"
+                android:ems="10"
+                android:fontFamily="@font/montserrat_variablefont"
+                android:hint="Telefono"
+                android:inputType="phone"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
+
+            <EditText
+                android:id="@+id/etContactoSecundarioM"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/round_borders_et2"
+                android:drawableLeft="@drawable/email_icon"
+                android:drawablePadding="10dp"
+                android:editable="false"
+                android:ems="10"
+                android:fontFamily="@font/montserrat_variablefont"
+                android:hint="Contacto Secundario"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
+
+            <EditText
+                android:id="@+id/etDireccionVetM"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/round_borders_et2"
+                android:drawableLeft="@drawable/district_icon"
+                android:drawablePadding="10dp"
+                android:editable="false"
+                android:ems="10"
+                android:fontFamily="@font/montserrat_variablefont"
+                android:hint="Direccion"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <LinearLayout
+                android:id="@+id/lyBtnCallContact"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:ignore="SpeakableTextPresentCheck">
+                android:gravity="center"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/btnCallContact"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_borders_btn_nw"
+                    android:padding="4dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ic_baseline_local_phonecontact_24"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
-                </LinearLayout>
-            </ScrollView>
+            </LinearLayout>
+
         </LinearLayout>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="30dp" />
-
-        <Button
-            android:id="@+id/btnRegistrarVeterinarios"
+        <LinearLayout
+            android:id="@+id/lyButtons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/round_borders_btn"
-            android:fontFamily="@font/montserrat_bold"
-            android:textColor="@color/white"
-            android:text="Editar Contactos de Emergencia" />
+            android:orientation="vertical">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="60dp" />
 
-        <Button
-            android:id="@+id/btnVetCercanos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/round_borders_btn"
-            android:fontFamily="@font/montserrat_bold"
-            android:textColor="@color/white"
-            android:text="Veterinarios Cercanos" />
+            <Button
+                android:id="@+id/btnRegistrarVeterinarios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_borders_btn"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Editar Contactos de Emergencia"
+                android:textColor="@color/white" />
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/btnVetCercanos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_borders_btn"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Veterinarios Cercanos"
+                android:textColor="@color/white" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+        </LinearLayout>
     </LinearLayout>
 
 

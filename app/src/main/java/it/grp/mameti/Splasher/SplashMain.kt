@@ -33,7 +33,7 @@ class SplashMain : AppCompatActivity() {
         prefs.apply()
 
         //NAVEGACION POR VENTANAS
-        guiaMonitoreo()
+        guiaMonitoreo(mail, ProviderTypeU.BASIC)
         guiaPerfilHumano(mail, ProviderTypeU.BASIC)
         guiaPerfilMascota(mail, ProviderTypeM.BASIC)
         guiaEmergencias(mail, ProviderTypeM.BASIC)
@@ -55,9 +55,12 @@ class SplashMain : AppCompatActivity() {
     }
 
     //NAVEGAR POR LAS VENTANAS
-    private fun guiaMonitoreo(){
+    private fun guiaMonitoreo(email: String, proveedor: ProviderTypeU){
         btnMonitor.setOnClickListener {
-            startActivity(Intent(this, Monitoreo::class.java))
+            startActivity(Intent(this, Monitoreo::class.java).apply {
+                putExtra("email", email)
+                putExtra("proveedor", proveedor.name)
+            })
         }
     }
     //DE LA MISMA MANERA EN QUE SE RECIBEN LOS DATOS EN ESTA CLASE, ESTOS DEBEN SER PASADOS A LOS

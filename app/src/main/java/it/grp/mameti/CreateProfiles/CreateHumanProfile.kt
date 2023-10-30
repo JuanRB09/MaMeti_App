@@ -7,19 +7,15 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import it.grp.mameti.R
-import it.grp.mameti.SQLite.SQLiteHelper
 import kotlinx.android.synthetic.main.activity_create_human_profile.*
 
 class CreateHumanProfile : AppCompatActivity() {
-
-    lateinit var mametiDBHelper: SQLiteHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_human_profile)
         supportActionBar?.hide()
 
-        mametiDBHelper = SQLiteHelper(this)
         noEmpty()
     }
 
