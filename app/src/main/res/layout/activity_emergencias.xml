@@ -24,13 +24,13 @@
 
             <LinearLayout
                 android:id="@+id/lySpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
 
                 <Spinner
                     android:id="@+id/spnContactos"
-                    android:layout_width="match_parent"
+                    android:layout_width="285dp"
                     android:layout_height="48dp"
                     android:background="@drawable/round_borders_et2"
                     android:fontFamily="@font/montserrat_variablefont"
@@ -38,17 +38,32 @@
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp" />
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent" />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="2px"
-                    android:background="@drawable/round_borders_et2"
-                    android:editable="false"
-                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                <ImageButton
+                    android:id="@+id/btnRefreshContacts"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_borders_btn_nw"
+                    android:padding="4dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ic_baseline_refresh_24"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
             </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@drawable/round_borders_et2"
+                android:editable="false"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             <Space
                 android:layout_width="match_parent"
@@ -79,8 +94,7 @@
                 android:editable="false"
                 android:ems="10"
                 android:fontFamily="@font/montserrat_variablefont"
-                android:hint="Telefono"
-                android:inputType="phone"
+                android:hint="Teléfono"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 tools:ignore="TouchTargetSizeCheck" />
@@ -118,7 +132,7 @@
                 android:editable="false"
                 android:ems="10"
                 android:fontFamily="@font/montserrat_variablefont"
-                android:hint="Direccion"
+                android:hint="Dirección"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 tools:ignore="TouchTargetSizeCheck" />
@@ -129,10 +143,10 @@
 
             <LinearLayout
                 android:id="@+id/lyBtnCallContact"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/btnCallContact"
@@ -140,9 +154,24 @@
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:background="@drawable/round_borders_btn_nw"
-                    android:padding="4dp"
+                    android:padding="8dp"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/ic_baseline_local_phonecontact_24"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <Space
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent" />
+
+                <ImageButton
+                    android:id="@+id/btnSendMail"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_borders_btn_nw"
+                    android:padding="10dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ic_baseline_contact_mail_24"
                     tools:ignore="SpeakableTextPresentCheck" />
 
             </LinearLayout>
@@ -157,7 +186,7 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="60dp" />
+                android:layout_height="100dp" />
 
             <Button
                 android:id="@+id/btnRegistrarVeterinarios"
@@ -184,10 +213,6 @@
                 android:fontFamily="@font/montserrat_bold"
                 android:text="Veterinarios Cercanos"
                 android:textColor="@color/white" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="30dp" />
 
         </LinearLayout>
     </LinearLayout>

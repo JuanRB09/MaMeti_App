@@ -67,7 +67,7 @@
                     android:drawablePadding="10dp"
                     android:ems="10"
                     android:fontFamily="@font/montserrat_variablefont"
-                    android:hint="Telefono"
+                    android:hint="Teléfono"
                     android:inputType="phone"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
@@ -104,7 +104,7 @@
                     android:drawablePadding="10dp"
                     android:ems="10"
                     android:fontFamily="@font/montserrat_variablefont"
-                    android:hint="Direccion"
+                    android:hint="Dirección"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     tools:ignore="TouchTargetSizeCheck" />
@@ -142,7 +142,7 @@
                 android:layout_height="20dp" />
 
             <LinearLayout
-                android:id="@+id/layEliminarContacto"
+                android:id="@+id/layEditarContactos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -156,15 +156,28 @@
                     android:fontFamily="@font/montserrat_bold"
                     android:gravity="left"
                     android:paddingLeft="20dp"
-                    android:text="Eliminar Contacto"
+                    android:text="Seleccionar Contacto"
                     android:textColor="@color/black" />
 
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="20dp" />
 
+                <Spinner
+                    android:id="@+id/spnContactosE"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/round_borders_et2"
+                    android:fontFamily="@font/montserrat_variablefont"
+                    android:textAlignment="center"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
                 <EditText
-                    android:id="@+id/etContactoElim"
+                    android:id="@+id/etContactoEd"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@drawable/round_borders_et2"
@@ -181,29 +194,106 @@
                     android:layout_width="match_parent"
                     android:layout_height="15dp" />
 
-                <LinearLayout
-                    android:id="@+id/layBtnEliminar"
+                <EditText
+                    android:id="@+id/etContactoPrincipalEd"
                     android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/round_borders_et2"
+                    android:drawableLeft="@drawable/phone_icon"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:fontFamily="@font/montserrat_variablefont"
+                    android:hint="Teléfono"
+                    android:inputType="phone"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp" />
+
+                <EditText
+                    android:id="@+id/etContactoSecundarioEd"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/round_borders_et2"
+                    android:drawableLeft="@drawable/email_icon"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:fontFamily="@font/montserrat_variablefont"
+                    android:hint="Contacto Secundario"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp" />
+
+                <EditText
+                    android:id="@+id/etDireccionVetEd"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/round_borders_et2"
+                    android:drawableLeft="@drawable/district_icon"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:fontFamily="@font/montserrat_variablefont"
+                    android:hint="Dirección"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp" />
+
+                <LinearLayout
+                    android:id="@+id/layBotones"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     tools:layout_editor_absoluteX="-16dp">
 
                     <Button
-                        android:id="@+id/btnEliminarContacto"
-                        android:layout_width="match_parent"
+                        android:id="@+id/btnEdit"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/round_borders_btn"
                         android:fontFamily="@font/montserrat_bold"
-                        android:text="Eliminar Contacto"
+                        android:text="Editar Contacto"
                         android:textColor="@color/white" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
 
+                    <Space
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent" />
+
+                    <ImageButton
+                        android:id="@+id/btnDelete"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_borders_btn_nw"
+                        android:padding="10dp"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/ic_baseline_delete_24"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

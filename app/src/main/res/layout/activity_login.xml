@@ -92,9 +92,21 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="25dp" />
 
         <Button
+            android:id="@+id/btnLoginGmail"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/google_icon"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Iniciar con Google"
+            android:paddingLeft="45dp"
+            android:paddingRight="20dp"
+            android:background="@drawable/round_borders_btn_w"
+            android:textColor="#080402" />
+
+        <!--<Button
             android:id="@+id/btForgotPass"
             android:layout_width="wrap_content"
             android:layout_height="18dp"
@@ -106,19 +118,30 @@
             android:textColor="@color/black"
             android:textSize="8dp"
             android:visibility="invisible"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck" />-->
 
-        <Space
+        <!--<Space
             android:layout_width="match_parent"
-            android:layout_height="25dp" />
+            android:layout_height="25dp" />-->
 
-        <LinearLayout
+        <!--<ImageButton
+            android:id="@+id/btnLoginGmail"
+            android:scaleType="fitXY"
+            android:padding="4dp"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:background="@drawable/round_borders_btn_rsl"
+            app:srcCompat="@drawable/google_icon"
+            tools:ignore="SpeakableTextPresentCheck" />-->
+
+       <!-- <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
-            <ImageButton
+            &lt;!&ndash;<ImageButton
                 android:id="@+id/btnLoginFB"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -127,24 +150,15 @@
                 android:clickable="false"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/fb_icon"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck" />&ndash;&gt;
 
             <Space
                 android:layout_width="20dp"
                 android:layout_height="match_parent" />
 
-            <ImageButton
-                android:id="@+id/btnLoginGmail"
-                android:scaleType="fitXY"
-                android:padding="4dp"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:background="@drawable/round_borders_btn_rsl"
-                app:srcCompat="@drawable/google_icon"
-                tools:ignore="SpeakableTextPresentCheck" />
 
-        </LinearLayout>
+
+        </LinearLayout>-->
 
     </LinearLayout>
 

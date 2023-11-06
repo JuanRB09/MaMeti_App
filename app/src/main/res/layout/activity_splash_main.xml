@@ -21,7 +21,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="@drawable/round_borders_btn_nw"
-            android:padding="4dp"
+            android:padding="8dp"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/ic_baseline_logout_24"
             tools:ignore="SpeakableTextPresentCheck" />
@@ -95,6 +95,9 @@
             android:background="@drawable/round_borders_btn"
             android:fontFamily="@font/montserrat_bold"
             android:textColor="@color/white"
+            android:paddingLeft="20dp"
+            android:paddingRight="30dp"
+            android:drawableLeft="@drawable/ic_baseline_emergency_24"
             android:text="EMERGENCIA" />
 
     </LinearLayout>

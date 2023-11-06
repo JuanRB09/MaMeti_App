@@ -12,6 +12,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import it.grp.mameti.R
 import kotlinx.android.synthetic.main.activity_mascota.*
 import kotlinx.android.synthetic.main.activity_usuario.*
@@ -41,7 +42,8 @@ class Mascota : AppCompatActivity() {
         setup(email ?:"", prov ?: "")
 
         //CARGAR LOS DATOS A LA VISTA
-        db.collection("users").document(email!!).collection("data").document("petData").get().addOnSuccessListener { documentSnapshot ->
+        db.collection("users").document(email!!).collection("data")
+            .document("petData").get().addOnSuccessListener { documentSnapshot ->
             val data = documentSnapshot.data
             if (data != null) {
                 etNombreMascota.setText(data["nombremascota"] as String?)
@@ -63,16 +65,29 @@ class Mascota : AppCompatActivity() {
             val talla = etTalla.text.toString()
             val opcionesTalla = arrayOf("Mini", "Chica", "Mediana", "Grande", "Gigante")
             if (opcionesTalla.contains(talla)) {
-                db.collection("users").document(email!!).collection("data").document("petData").set(
-                    hashMapOf(
-                        "nombremascota" to etNombreMascota.text.toString(),
-                        "edadmascota" to etEdad.text.toString(),
-                        "pesomascota" to etPesoMascota.text.toString(),
-                        "razamascota" to etRazaMascota.text.toString(),
-                        "tallamascota" to etTalla.text.toString(),
-                        "mapaimagenmascota" to base64String.toString()
-                    )
+                //DOCUMENTO UNICO DE MASCOTA
+                db.collection("users").document(email!!).collection("data")
+                    .document("petData").set(
+                        hashMapOf(
+                            "nombremascota" to etNombreMascota.text.toString(),
+                            "edadmascota" to etEdad.text.toString(),
+                            "pesomascota" to etPesoMascota.text.toString(),
+                            "razamascota" to etRazaMascota.text.toString(),
+                            "tallamascota" to etTalla.text.toString(),
+                            "mapaimagenmascota" to base64String.toString()
+                        )
                 )
+                //DOCUMENTO GLOBAL DE MAIL
+                db.collection("users").document(email!!).collection("data")
+                    .document("mailData").set(
+                        hashMapOf(
+                            "nombremascota" to etNombreMascota.text.toString(),
+                            "edadmascota" to etEdad.text.toString(),
+                            "pesomascota" to etPesoMascota.text.toString(),
+                            "razamascota" to etRazaMascota.text.toString(),
+                            "tallamascota" to etTalla.text.toString()
+                        ), SetOptions.merge()
+                    )
                 Toast.makeText(applicationContext, "¡Datos Guardados!", Toast.LENGTH_SHORT).show()
             }else{
                 alertaTalla()

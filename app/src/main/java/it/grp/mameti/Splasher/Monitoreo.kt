@@ -13,6 +13,7 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import it.grp.mameti.R
 import kotlinx.android.synthetic.main.activity_mascota.*
 import kotlinx.android.synthetic.main.activity_monitoreo.*
@@ -22,8 +23,10 @@ import org.json.JSONObject
 import java.util.*
 import kotlin.random.Random
 
+private val db = FirebaseFirestore.getInstance()
 var mailMon = ""
 var provMon = ""
+var email = ""
 
 val id = 1
 var temperatura:Float = 0.0f
@@ -82,12 +85,13 @@ class Monitoreo : AppCompatActivity() {
         setContentView(R.layout.activity_monitoreo)
 
         val bundle = intent.extras
-        val email = bundle?.getString("email")
+        email = bundle?.getString("email").toString()
         val prov = bundle?.getString("proveedor")
         setup(email ?:"", prov ?: "")
 
         //CARGAR LA TALLA DE LA MASCOTA EN UNA VARIABLE
-        db.collection("users").document(email!!).collection("data").document("petData").get().addOnSuccessListener { documentSnapshot ->
+        db.collection("users").document(email!!).collection("data").document("petData").get()
+            .addOnSuccessListener { documentSnapshot ->
             val data = documentSnapshot.data
             if (data != null)
                 talla = data["tallamascota"] as String?
@@ -103,7 +107,8 @@ class Monitoreo : AppCompatActivity() {
                     cardMin = valores_par[4]
                     cardMax = valores_par[5]
                 }
-                tvValoresTalla.text = "Talla de Mascota: $talla\nMínimo de Cardio: $cardMin - Máximo de Cardio: $cardMax"
+                tvValoresTalla.text = "Talla de Mascota: $talla\n" +
+                        "Mínimo de Cardio: $cardMin - Máximo de Cardio: $cardMax"
                 etT1.setText(cardMin.toString())
                 etT2.setText(cardMax.toString())
             }
@@ -130,6 +135,18 @@ class Monitoreo : AppCompatActivity() {
 
 
 
+    }
+
+    override fun onBackPressed() {
+        db.collection("users").document(email!!).collection("data")
+            .document("mailData").set(
+                hashMapOf(
+                    "cardio" to TXTDatoCardio.text.toString(),
+                    "temperatura" to TXTDatoTemperatura.text.toString(),
+                    "humedad" to TXTdatoH.text.toString()
+                ), SetOptions.merge()
+            )
+        super.onBackPressed()
     }
 
     private fun setup(email:String, proveedor:String) {
