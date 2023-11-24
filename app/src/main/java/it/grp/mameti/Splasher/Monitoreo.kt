@@ -1,9 +1,7 @@
 package it.grp.mameti.Splasher
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
-import android.util.Base64
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.RequestQueue
@@ -15,20 +13,19 @@ import com.android.volley.toolbox.Volley
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import it.grp.mameti.R
-import kotlinx.android.synthetic.main.activity_mascota.*
 import kotlinx.android.synthetic.main.activity_monitoreo.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
-import kotlin.random.Random
 
 private val db = FirebaseFirestore.getInstance()
 var mailMon = ""
 var provMon = ""
 var email = ""
 
-val id = 1
+//val id = 1
+val id = 1414
 var temperatura:Float = 0.0f
 var humedad:Float = 0.0f
 var cardio = 0
@@ -207,7 +204,8 @@ class Monitoreo : AppCompatActivity() {
 
     //CONEXIÓN A LA BASE DE DATOS
     private fun consultaBD() {
-        val URL1 = "https://19590323.tecsanjuan.com/MaMeti_Data/consulta.php?id=$id"
+        //val URL1 = "https://19590323.tecsanjuan.com/MaMeti_Data/consulta.php?id=$id"
+        val URL1 = "https://19590323.tecsanjuan.com/PIT_MaMeti/leeM.php?id=$id"
         val jsonArrayRequest = JsonArrayRequest(URL1, Listener<JSONArray?>() {
             fun onResponse(response: JSONArray) {
                 var jsonObject: JSONObject? = null
@@ -216,7 +214,8 @@ class Monitoreo : AppCompatActivity() {
                         jsonObject = response.getJSONObject(x)
                         temperatura = jsonObject.getString("temperatura").toFloat()
                         humedad = jsonObject.getString("humedad").toFloat()
-                        cardio = jsonObject.getString("frec_card").toInt()
+                        //cardio = jsonObject.getString("frec_card").toInt()
+                        cardio = jsonObject.getString("cardio").toInt()
                         card = cardio
                         temp = temperatura
                         hume = humedad.toInt()
